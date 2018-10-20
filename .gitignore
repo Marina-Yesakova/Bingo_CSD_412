@@ -15,6 +15,9 @@ $RECYCLE.BIN/
 *.msm
 *.msp
 
+# Visual Studio Metadata
+.vs/
+
 # Windows shortcuts
 *.lnk
 
