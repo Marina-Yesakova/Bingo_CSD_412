@@ -1,14 +1,19 @@
 # Bingo_CSD_412
 
 Buzzword Bingo
+
 Group B - John, Marina, Kyle
 10/19/2018
 Overview
+
 The idea is to make a very simple Buzzword Bingo board to begin with and to continually add new features as we build out the application. Basically we are going to follow an Agile approach to this and build something that barely works to begin with and slowly add features as we get better with using ASP.Net Core, MVC, and Azure services
 Beginning with the Basics
+
 I want to take an approach of ‘lets build as little as possible to get a working product’. Think Agile.
+
 Web App
 Use Azure with a student account to create a publicly available application. I think Dave said it was pretty easy to create a web app and attach a SQL database. I’m hoping he goes over it in class soon.. I’m still pretty lost on how to connect a web app to a database and where to perform SQL queries to get data or populate the database.
+
 Views
 	Two views to start with..
 Buzzword Bingo board
@@ -16,6 +21,7 @@ Maybe update the Bingo board after a page refresh to start with
 Move to creating a button later
 See all words currently in the database
 Later on be able to write to the database or update words
+
 	As for styling/CSS I’m hoping to make use of Bootstrap to make the project look somewhat professional without much effort. 
 Controllers
 	Not much going on here except to pass data from the database/model to the view. In future features we will likely add more here.
