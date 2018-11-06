@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebApplication1.Models
+namespace Bingo_CSD_412.Models
 {
     public class DummyBoard
     {
-        HashSet<int> IdSet { get; set; } //Set used to operate with random selection logic
-        char[] DisplayBoard { get; set; } //Array that the user will see
-        char[] DummyDatabase { get; set; } //place holder DB
-        int[] FunctionalBoard { get; set; } //Array that tracks if a cell has been selected
-        int Size;
+        private HashSet<int> IdSet { get; set; } //Set used to operate with random selection logic
+        public char[] DisplayBoard { get; set; } //Array that the user will see
+        private char[] DummyDatabase { get; set; } //place holder DB
+        private int[] FunctionalBoard { get; set; } //Array that tracks if a cell has been selected
+        private int Size;
 
         public DummyBoard()
         {
@@ -19,7 +19,6 @@ namespace WebApplication1.Models
             FunctionalBoard = new int[25]; //This array stores values of either 0 for not selected or 1 for select
             IdSet = new HashSet<int>();
             Size = 25;
-
             GenerateDummyDatabase();
             FillSet();
             FillBoard();
@@ -31,7 +30,6 @@ namespace WebApplication1.Models
         */
         private void GenerateDummyDatabase()
         {
-
             DummyDatabase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()".ToCharArray();
         }
 
@@ -40,7 +38,6 @@ namespace WebApplication1.Models
         {
             Random Rnd = new Random();
             bool ConfirmSize = false;
-
             while (!ConfirmSize)
             {
                 int value = Rnd.Next(40); //40 will be changed to the # of rows in the DB
@@ -72,7 +69,6 @@ namespace WebApplication1.Models
             {
                 GameOver();
             }
-
         }
 
         // to be implemented later
