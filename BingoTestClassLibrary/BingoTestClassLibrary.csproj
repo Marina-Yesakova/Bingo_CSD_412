@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Bingo_CSD_412\Bingo_CSD_412.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="QueryingData\" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,14 @@
+C:\Users\Kyle\source\repos\Bingo\Bingo_CSD_412\BingoTestClassLibrary\bin\Debug\netcoreapp2.1\Bingo_CSD_412.Views.dll
+C:\Users\Kyle\source\repos\Bingo\Bingo_CSD_412\BingoTestClassLibrary\bin\Debug\netcoreapp2.1\Bingo_CSD_412.Views.pdb
+C:\Users\Kyle\source\repos\Bingo\Bingo_CSD_412\BingoTestClassLibrary\bin\Debug\netcoreapp2.1\BingoTestClassLibrary.deps.json
+C:\Users\Kyle\source\repos\Bingo\Bingo_CSD_412\BingoTestClassLibrary\bin\Debug\netcoreapp2.1\BingoTestClassLibrary.dll
+C:\Users\Kyle\source\repos\Bingo\Bingo_CSD_412\BingoTestClassLibrary\bin\Debug\netcoreapp2.1\BingoTestClassLibrary.pdb
+C:\Users\Kyle\source\repos\Bingo\Bingo_CSD_412\BingoTestClassLibrary\bin\Debug\netcoreapp2.1\Bingo_CSD_412.dll
+C:\Users\Kyle\source\repos\Bingo\Bingo_CSD_412\BingoTestClassLibrary\bin\Debug\netcoreapp2.1\Bingo_CSD_412.pdb
+C:\Users\Kyle\source\repos\Bingo\Bingo_CSD_412\BingoTestClassLibrary\obj\Debug\netcoreapp2.1\BingoTestClassLibrary.csprojAssemblyReference.cache
+C:\Users\Kyle\source\repos\Bingo\Bingo_CSD_412\BingoTestClassLibrary\obj\Debug\netcoreapp2.1\BingoTestClassLibrary.csproj.CoreCompileInputs.cache
+C:\Users\Kyle\source\repos\Bingo\Bingo_CSD_412\BingoTestClassLibrary\obj\Debug\netcoreapp2.1\BingoTestClassLibrary.AssemblyInfoInputs.cache
+C:\Users\Kyle\source\repos\Bingo\Bingo_CSD_412\BingoTestClassLibrary\obj\Debug\netcoreapp2.1\BingoTestClassLibrary.AssemblyInfo.cs
+C:\Users\Kyle\source\repos\Bingo\Bingo_CSD_412\BingoTestClassLibrary\obj\Debug\netcoreapp2.1\BingoTestClassLibrary.csproj.CopyComplete
+C:\Users\Kyle\source\repos\Bingo\Bingo_CSD_412\BingoTestClassLibrary\obj\Debug\netcoreapp2.1\BingoTestClassLibrary.dll
+C:\Users\Kyle\source\repos\Bingo\Bingo_CSD_412\BingoTestClassLibrary\obj\Debug\netcoreapp2.1\BingoTestClassLibrary.pdb
