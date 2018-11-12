@@ -21,7 +21,8 @@ $RECYCLE.BIN/
 .obj/
 ./Bingo_CSD_412/bin/
 ./Bingo_CSD_412/obj/
-
+Bingo_CSD_412/obj/
+Bingo_CSD_412/bin/
 # Windows shortcuts
 *.lnk
 
