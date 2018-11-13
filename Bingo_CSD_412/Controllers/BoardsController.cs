@@ -13,7 +13,6 @@ namespace Bingo_CSD_412.Controllers
         // GET: Boards/Create
         public ActionResult Generate()
         {
-
             Board board = new Board();
             return View(board);
         }
@@ -23,7 +22,5 @@ namespace Bingo_CSD_412.Controllers
         {
             return View();
         }
-
-      
     }
 }
