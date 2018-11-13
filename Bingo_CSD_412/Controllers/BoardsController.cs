@@ -10,17 +10,30 @@ namespace Bingo_CSD_412.Controllers
 {
     public class BoardsController : Controller
     {
-        // GET: Boards/Create
-        public ActionResult Generate()
+        //TODO implement connect to Database here and proper dependency injection for BoardManager into BoardsController 
+        public static BoardManager boardManager = new BoardManager();
+
+        // GET: Boards/Generate/CSD_412
+        public ActionResult Generate(String category)
         {
-            Board board = new Board();
+            Board board = boardManager.GenerateBoard(5, 5, category);
+            // returning the details page of the new board
+            return RedirectToAction(nameof(Details), new { id = board.BoardId });
+        }
+
+        // GET: Boards/Details/5
+        public ActionResult Details(int boardId)
+        {
+            Board board = boardManager.GetBoardById(boardId);
             return View(board);
         }
 
-        // GET: Boards/Index/5
-        public ActionResult Index(int id)
+        //logic for crossing the word in Board
+        public ActionResult CrossWord(int boardId, int wordIndex)
         {
-            return View();
+            Board board = boardManager.CrossWordInBoard(boardId, wordIndex);
+            // returning the details page of the new board
+            return RedirectToAction(nameof(Details), new { id = board.BoardId });
         }
     }
 }
