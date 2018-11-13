@@ -10,10 +10,12 @@ namespace Bingo_CSD_412.Controllers
 {
     public class CategoriesController : Controller
     {
+        //TODO implement connect to Database here and proper dependency injection for CategoryManager into CategoriesController 
+        public static CategoryManager categoryManager = new CategoryManager();
+
         // GET: Categories
         public ActionResult Index()
         {
-            CategoryManager categoryManager = new CategoryManager();
             Category[] categories = categoryManager.ListAllCategories();
             return View(categories);
         }
