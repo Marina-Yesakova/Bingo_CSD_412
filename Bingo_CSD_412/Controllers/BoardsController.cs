@@ -4,32 +4,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Bingo_CSD_412.Models;
 
 namespace Bingo_CSD_412.Controllers
 {
     public class BoardsController : Controller
     {
         // GET: Boards/Create
-        public ActionResult Create()
+        public ActionResult Generate()
         {
-            return View();
-        }
 
-        // POST: Boards/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            Board board = new Board();
+            return View(board);
         }
 
         // GET: Boards/Index/5

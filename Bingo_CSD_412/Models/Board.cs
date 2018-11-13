@@ -7,18 +7,22 @@ namespace Bingo_CSD_412.Models
 {
     public class Board
     {
+        public int NumberOfRows { get; set; } 
+        public int NumberOfColumns { get; set; } 
         private HashSet<int> IdSet { get; set; } //Set used to operate with random selection logic
-        public char[] DisplayBoard { get; set; } //Array that the user will see
+        public String[] DisplayBoard { get; set; } //Array that the user will see
         private char[] DummyDatabase { get; set; } //place holder DB
         private int[] FunctionalBoard { get; set; } //Array that tracks if a cell has been selected
         private int Size;
 
         public Board()
         {
-            DisplayBoard = new char[25];
-            FunctionalBoard = new int[25]; //This array stores values of either 0 for not selected or 1 for select
+            NumberOfRows = 5;
+            NumberOfColumns = 5;
+            Size = NumberOfRows * NumberOfColumns;
+            DisplayBoard = new String[Size];
+            FunctionalBoard = new int[Size]; //This array stores values of either 0 for not selected or 1 for select
             IdSet = new HashSet<int>();
-            Size = 25;
             GenerateDummyDatabase();
             FillSet();
             FillBoard();
@@ -56,7 +60,7 @@ namespace Bingo_CSD_412.Models
             foreach (int i in IdSet)
             {
                 // get value of ID i from database and store it in DisplayBoard[index] 
-                DisplayBoard[Index] = DummyDatabase[i];
+                DisplayBoard[Index] = DummyDatabase[i].ToString();
                 Index++;
             }
         }
