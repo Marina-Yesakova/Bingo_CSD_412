@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Bingo_CSD_412.Models
 {
@@ -10,19 +8,25 @@ namespace Bingo_CSD_412.Models
         public int NumberOfRows { get; set; } 
         public int NumberOfColumns { get; set; }
         public int BoardId { get; set; }
+        public String Category { get; set; }
         public String[] DisplayBoard { get; set; } //Array that the user will see
         private HashSet<int> IdSet { get; set; } //Set used to operate with random selection logic
         private char[] DummyDatabase { get; set; } //place holder DB
-        private int[] FunctionalBoard { get; set; } //Array that tracks if a cell has been selected
+        private bool[] FunctionalBoard { get; set; } //Array that tracks if a cell has been selected
         private int Size;
+
+        // TODO: this should be handled by database - it should return us unique id for each Board we insert into database
+        private static int nextId = 1;
 
         public Board()
         {
+            BoardId = nextId;
+            nextId++;
             NumberOfRows = 5;
             NumberOfColumns = 5;
             Size = NumberOfRows * NumberOfColumns;
             DisplayBoard = new String[Size];
-            FunctionalBoard = new int[Size]; //This array stores values of either 0 for not selected or 1 for select
+            FunctionalBoard = new bool[Size]; //This array stores values of either 0 for not selected or 1 for select
             IdSet = new HashSet<int>();
             GenerateDummyDatabase();
             FillSet();
@@ -69,11 +73,16 @@ namespace Bingo_CSD_412.Models
         // to be implemented later 
         public void CellSelect(int index)
         {
-            FunctionalBoard[index] = 1;
+            FunctionalBoard[index] = true;
             if (CheckForBingo(index))
             {
                 GameOver();
             }
+        }
+
+        public bool IsCellCrossed(int index)
+        {
+            return FunctionalBoard[index];
         }
 
         // to be implemented later

@@ -5,23 +5,35 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Board Details</h2>
-
+<h2>Board Details - @Model.Category</h2>
+<br />
 <div>
     <table class="tab-content" style="width:70%">
 
         @for (int ir = 0; ir < Model.NumberOfRows; ir++)
         {
-        <tr>
-            @for (int ic = 0; ic < Model.NumberOfColumns; ic++)
-            {
-                int i = ir * Model.NumberOfColumns + ic;
-                <td>
-                    @Html.DisplayFor(modelItem => Model.DisplayBoard[i])
-                    <a href="CrossWord/?boardId=@Model.BoardId&wordIndex=@i">cross</a> 
+            <tr>
+                @for (int ic = 0; ic < Model.NumberOfColumns; ic++)
+                {
+                    int i = ir * Model.NumberOfColumns + ic;
+                    string style = "white";
+                    @if (Model.IsCellCrossed(i))
+                    {
+                        style = "palegreen";
+                    }
+                <td bgcolor="@style">
+                    <form asp-action="CrossWord">
+                        @Html.DisplayFor(modelItem => Model.DisplayBoard[i])&nbsp;
+                        <input type="hidden" name="boardId" value="@Model.BoardId" />
+                        <input type="hidden" name="wordIndex" value="@i" />
+                        <input type="submit" value="Cross" class="btn-link" />
+                    </form>
                 </td>
-            }
-        </tr>
+                }
+            </tr>
         }
     </table>
 </div>
+<br />
+<a href="/Boards/Generate?category=CSD_412">Generate New Board</a><br />
+<a href="/Boards/Index">My Boards</a><br />
