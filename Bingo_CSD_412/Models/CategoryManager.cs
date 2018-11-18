@@ -10,7 +10,7 @@ namespace Bingo_CSD_412.Models
         public Category[] ListAllCategories()
         {
             //TODO: Implement logic to return all caterories from a Database
-            Category[] result = null; //This will be retrieved from DB
+            Category[] result = new[] { Category.CSD_412_Category }; //This will be retrieved from DB
             return result;
         }
 
