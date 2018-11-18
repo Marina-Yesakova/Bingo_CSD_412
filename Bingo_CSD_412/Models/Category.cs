@@ -30,7 +30,7 @@ namespace Bingo_CSD_412.Models
             Words = new HashSet<string>();
         }*/
 
-        private string GetName()
+        private string DefineName()
         {
             //TODO: Add funcationality that allows user to name their category
             //Return that user input as a String
@@ -49,23 +49,13 @@ namespace Bingo_CSD_412.Models
         public void AddWord(string word) //TODO: Implement an update to database
         {   
             Words.Add(word);
-        }
-
-        public void EditWord(string oldword, string newword) //TODO: Implement an update to database
-        {
-            if (Words.Contains(oldword))
-            {
-                if(!Words.Contains(newword))
-                {
-                    Words.Remove(oldword);
-                    Words.Add(newword);
-                }
-            }
+            Size = Words.Count;
         }
 
         public void RemoveWord(string word) //TODO: Implement an update to database
         {
             Words.Remove(word);
+            Size = Words.Count;
         }
     }
 }
