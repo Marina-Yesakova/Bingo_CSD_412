@@ -7,30 +7,35 @@ namespace Bingo_CSD_412.Models
 {
     public class BoardManager
     {
+        // TODO: this should be implemented in database
+        private static IDictionary<int, Board> boards = new Dictionary<int, Board>();
+
         public Board GenerateBoard(int numberOfRows, int numberOfColumns, String category)
         {
             //TODO implement logic or migrate from Board class
-            return new Board();
+            Board b = new Board();
+            b.Category = category;
+            boards[b.BoardId] = b;
+            return b;
         }
 
         public Board GetBoardById(int boardId)
         {
-            //TODO implement logic
-            return new Board();
+            return boards[boardId];
         }
 
         public Board[] GetAllBoardsForUser(String userName)
         {
             //TODO implement logic
-
-            return new[] { new Board() };
+            return boards.Values.ToArray<Board>();
         }
 
         //logic for crossing the word in Board
         public Board CrossWordInBoard(int boardId, int wordIndex)
         {
-            //TODO implement logic
-            return new Board();
+            Board b = boards[boardId];
+            b.CellSelect(wordIndex);
+            return b;
         }
     }
 }
