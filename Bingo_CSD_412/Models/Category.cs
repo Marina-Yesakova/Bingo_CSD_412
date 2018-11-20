@@ -11,7 +11,6 @@ namespace Bingo_CSD_412.Models
         public static readonly Category CSD_412_Category = new Category();
         public String Name { get; set; }
         public HashSet<string> Words { get; set; }
-        public int Id { get; }
 
         static Category() //Kept this for testing purposes
         {
