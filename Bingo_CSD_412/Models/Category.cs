@@ -8,12 +8,14 @@ namespace Bingo_CSD_412.Models
     public class Category
     {
         //static category TODO: have to implement in Database 
-        public static readonly Category CSD_412_Category = new Category();
+        public static readonly Category CSD_412_Category;
         public String Name { get; set; }
+        public int Size { get; set; }
         public HashSet<string> Words { get; set; }
 
         static Category() //Kept this for testing purposes
         {
+            CSD_412_Category = new Category();
             CSD_412_Category.Name = "CSD_412";
             CSD_412_Category.Words.Add("HTTP");
             CSD_412_Category.Words.Add("URL");
@@ -22,12 +24,11 @@ namespace Bingo_CSD_412.Models
             CSD_412_Category.Words.Add("Application Settings");
         }
 
-        /*public Category()  <-- Real constructor
+        public Category()
         {
-            Id = GenerateId();
-            Name = GetName();
+            //Name = GetName();
             Words = new HashSet<string>();
-        }*/
+        }
 
         //TODO: View must implement a GUI for the user to send information to the Model
         public void AddWord(string word) //TODO: Implement an update to database

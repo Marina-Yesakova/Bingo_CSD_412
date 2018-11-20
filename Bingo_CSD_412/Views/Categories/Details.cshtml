@@ -21,17 +21,17 @@
             </th>
             <th></th>
         </tr>
-        @for (int i = 0; i < Model.Words.Length; i++)
+        @foreach (String Word in Model.Words)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => Model.Words[i])
+                    @Html.DisplayFor(modelItem => Word)
                 </td>
                 <td>
                     <form asp-action="RemoveWordFromCategory">
                         &nbsp;
                         <input type="hidden" name="categoryName" value="@Model.Name" />
-                        <input type="hidden" name="word" value="@Model.Words[i]" />
+                        <input type="hidden" name="word" value="@Word" />
                         <input type="submit" value="Remove" class="btn-link" />
                     </form>
                 </td>
