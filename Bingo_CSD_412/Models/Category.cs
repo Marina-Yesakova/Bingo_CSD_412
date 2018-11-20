@@ -29,21 +29,6 @@ namespace Bingo_CSD_412.Models
             Words = new HashSet<string>();
         }*/
 
-        private string DefineName()
-        {
-            //TODO: Add funcationality that allows user to name their category
-            //Return that user input as a String
-            throw new NotImplementedException();
-        }
-
-        private int GenerateId()
-        {
-            //TODO: Retrive from database the count of categories, and increament by one
-            //return CategoryCount++;
-            throw new NotImplementedException();
-        }
-
-
         //TODO: View must implement a GUI for the user to send information to the Model
         public void AddWord(string word) //TODO: Implement an update to database
         {   
