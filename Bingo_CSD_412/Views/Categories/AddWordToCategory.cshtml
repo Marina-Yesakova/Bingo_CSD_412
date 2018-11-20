@@ -1,0 +1,26 @@
+﻿@model System.String
+
+@{
+    ViewData["Title"] = "Add Word To Category " + Model;
+}
+
+<h2>@ViewData["Title"]</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddWordToCategory">
+            <input type="hidden" name="categoryName" value="@Model" />
+            <label for="word" class="control-label">Word</label>
+            <input name="word" class="form-control" />
+            <input type="submit" value="Add" class="btn btn-default" />
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Details" asp-route-categoryName="@Model">Back to @Model</a>
+</div>
+<br />
+<div>
+    <a asp-action="Index">Back to Categories</a>
+</div>

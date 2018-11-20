@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Bingo_CSD_412.Models;
 
@@ -20,7 +16,7 @@ namespace Bingo_CSD_412.Controllers
             return View(categories);
         }
 
-        // GET: Categories/Details/5
+        // GET: Categories/Details/CSD_412
         public ActionResult Details(String categoryName)
         {
             return View(Category.CSD_412_Category);
@@ -34,14 +30,12 @@ namespace Bingo_CSD_412.Controllers
 
         // POST: Categories/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(String categoryName)
         {
             try
             {
                 // TODO: Add insert logic here
-
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Details), new { categoryName = categoryName });
             }
             catch
             {
@@ -49,10 +43,25 @@ namespace Bingo_CSD_412.Controllers
             }
         }
 
-        // GET: Categories/Edit/5
-        public ActionResult Edit(int id)
+        // GET: Categories/AddWordToCategory?categoryName=CSD_412
+        public ActionResult AddWordToCategory(String categoryName)
         {
-            return View();
+            return View("AddWordToCategory", categoryName);
+        }
+
+        // POST: Categories/AddWordToCategory
+        [HttpPost]
+        public ActionResult AddWordToCategory(String categoryName, String word)
+        {
+            categoryManager.AddWordToCategory(categoryName, word);
+            return RedirectToAction(nameof(Details), new { categoryName = categoryName });
+        }
+
+        // POST: Categories/RemoveWordFromCategory
+        [HttpPost]
+        public ActionResult RemoveWordFromCategory(String categoryName, String word)
+        {
+            return RedirectToAction(nameof(Details), new { categoryName = categoryName });
         }
     }
 }
