@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Bingo_CSD_412.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Bingo_CSD_412
 {
@@ -31,6 +33,11 @@ namespace Bingo_CSD_412
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddDbContext<BingoContext>(options =>
+            {
+                string connectionString = Configuration.GetConnectionString("BingoDataContext");
+                options.UseSqlServer(connectionString);
+            });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
