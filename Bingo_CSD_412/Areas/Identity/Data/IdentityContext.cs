@@ -23,4 +23,6 @@ namespace Bingo_CSD_412.Models
             // Add your customizations after calling base.OnModelCreating(builder);
         }
     }
+
+
 }

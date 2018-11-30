@@ -39,12 +39,6 @@ namespace Bingo_CSD_412
                 options.UseSqlServer(connectionString);
             });
 
-            services.AddDbContext<IdentityContext>(options =>
-            {
-                string connectionString = Configuration.GetConnectionString("IdentityContext");
-                options.UseSqlServer(connectionString);
-            });
-
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
