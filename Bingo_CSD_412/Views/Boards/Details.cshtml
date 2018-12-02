@@ -4,36 +4,37 @@
     ViewData["Title"] = "Board Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Board Details - @Model.Category</h2>
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-theme.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
 <br />
-<div>
-    <table class="tab-content" style="width:70%">
-
-        @for (int ir = 0; ir < Model.NumberOfRows; ir++)
-        {
-            <tr>
-                @for (int ic = 0; ic < Model.NumberOfColumns; ic++)
-                {
-                    int i = ir * Model.NumberOfColumns + ic;
-                    string style = "white";
-                    @if (Model.IsCellCrossed(i))
-                    {
-                        style = "palegreen";
-                    }
-                <td bgcolor="@style">
+<table id="bingo-board" class="table table-bordered">
+    <tr>
+        <th>B</th>
+        <th>I</th>
+        <th>N</th>
+        <th>G</th>
+        <th>O</th>
+    </tr>
+    @for (int ir = 0; ir < Model.NumberOfRows; ir++)
+    {
+        <tr>
+            @for (int ic = 0; ic < Model.NumberOfColumns; ic++)
+            {
+                int i = ir * Model.NumberOfColumns + ic;
+                string checkState = (Model.IsCellCrossed(i)) ? "is-checked" : "not-checked"; //used to set class for visual feedback
+                
+                <td class="bingo-square @checkState">
                     <form asp-action="CrossWord">
-                        @Html.DisplayFor(modelItem => Model.DisplayBoard[i])&nbsp;
                         <input type="hidden" name="boardId" value="@Model.BoardId" />
                         <input type="hidden" name="wordIndex" value="@i" />
-                        <input type="submit" value="Cross" class="btn-link" />
+                        <input type="submit" value=@Html.DisplayFor(modelItem => Model.DisplayBoard[i]) class="btn-link" />
                     </form>
                 </td>
-                }
-            </tr>
-        }
-    </table>
-</div>
+            }
+        </tr>
+    }
+</table>
 <br />
-<a href="/Boards/Generate?category=CSD_412">Generate New Board</a><br />
-<a href="/Boards/Index">My Boards</a><br />

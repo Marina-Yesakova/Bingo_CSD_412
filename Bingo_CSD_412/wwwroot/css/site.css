@@ -35,3 +35,28 @@ body {
         display: none;
     }
 }
+
+#bingo-board > tbody > tr > .bingo-square {
+    padding: 50px;
+    border: 1px solid #808080;
+    color: black;
+}
+
+#bingo-board > tbody > tr > th {
+    padding: 10px 50px 10px 50px;
+    text-align: center;
+    font-size: 30px;
+    border: 1px solid #808080;
+}
+
+#bingo-board {
+    text-align: center;
+}
+
+.is-checked {
+    background-color: darkorange;
+}
+
+.btn-link, .btn-link:hover {
+    color: black
+}

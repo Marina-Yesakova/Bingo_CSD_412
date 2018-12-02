@@ -73,7 +73,7 @@ namespace Bingo_CSD_412.Models
         // to be implemented later 
         public void CellSelect(int index)
         {
-            FunctionalBoard[index] = true;
+            FunctionalBoard[index] = (FunctionalBoard[index] == true) ? false : true; //allows users to 'un-check' squares
             if (CheckForBingo(index))
             {
                 GameOver();
