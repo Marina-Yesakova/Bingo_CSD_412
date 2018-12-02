@@ -85,12 +85,71 @@ namespace Bingo_CSD_412.Models
             return FunctionalBoard[index];
         }
 
-        // to be implemented later
         private bool CheckForBingo(int index)
         {
-            //logic will check the current row and column and if applicable the diagnals for bingo
-            return false; 
+            int ColumnCount = 0; //validation varible 
+            int RowCount = 0;
+            int DiagonalCount = 0;
+            int RowPosition = 0;
+            int DiagonalPosition = 0;
+
+            while (index >= NumberOfColumns)
+            {
+                RowPosition++;
+                index -= NumberOfColumns; //Sets index to point the earliest value in the column
+            }
+
+            int TempIndex = index;
+            for (int i = 0; i < NumberOfRows; i++) //Checks columns
+            {
+                if (IsCellCrossed(TempIndex)) //if column is crossed
+                {
+                    ColumnCount++;
+                }
+                TempIndex += NumberOfColumns;
+            }
+
+            if (RowPosition == index) //checks right Diagonal
+            {
+                for (int i = 0; i < NumberOfColumns; i++)
+                {
+                    if (IsCellCrossed(DiagonalPosition))
+                    {
+                        DiagonalCount++;
+                        DiagonalPosition += NumberOfColumns + 1;
+                    }
+                }
+            }
+            else if (RowPosition + index == NumberOfRows - 1) //checks left Diagonal
+            {
+                DiagonalPosition = Size - NumberOfColumns;
+                for (int i = 0; i < NumberOfColumns; i++)
+                {
+                    if (IsCellCrossed(DiagonalPosition))
+                    {
+                        DiagonalCount++;
+                    }
+                    DiagonalPosition -= NumberOfColumns - 1;
+                }
+            }
+            index = RowPosition * NumberOfColumns;
+
+            for (int i = index; i < NumberOfColumns + index; i++) //checks rows
+            {
+                if (IsCellCrossed(i))
+                {
+                    RowCount++;
+                }
+            }
+
+            if (ColumnCount == NumberOfRows || RowCount == NumberOfColumns || DiagonalCount == NumberOfColumns) //if any of the three condition were true return true
+            {
+                return true;
+            }
+
+            return false;
         }
+
 
         // to be implemented later
         private void GameOver()
