@@ -45,13 +45,20 @@
                 int i = ir * Model.NumberOfColumns + ic;
                 string checkState = (Model.IsCellCrossed(i)) ? "is-checked" : "not-checked"; //used to set class for visual feedback
 
-                <td class="bingo-square @checkState">
+            <td class="bingo-square @checkState">
+                @if (Model.IsCellCrossed(i))
+                {
+                    @Html.DisplayFor(modelItem => Model.DisplayBoard[i])
+                }
+                @if (!Model.IsCellCrossed(i))
+                {
                     <form asp-action="CrossWord">
                         <input type="hidden" name="boardId" value="@Model.BoardId" />
                         <input type="hidden" name="wordIndex" value="@i" />
                         <input type="submit" value=@Html.DisplayFor(modelItem => Model.DisplayBoard[i]) class="btn-link" />
                     </form>
-                </td>
+                }
+            </td>
             }
         </tr>
     }
