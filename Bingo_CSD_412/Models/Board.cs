@@ -33,7 +33,7 @@ namespace Bingo_CSD_412.Models
             GenerateDummyDatabase();
             FillSet();
             FillBoard();
-            BingoOccured = false;
+            BingoOccurred = false;
         }
 
         /*
