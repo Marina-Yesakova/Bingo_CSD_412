@@ -8,7 +8,7 @@ using Bingo_CSD_412.Models;
 
 namespace Bingo_CSD_412.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         public IActionResult Index()
         {

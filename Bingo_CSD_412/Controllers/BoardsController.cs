@@ -4,7 +4,7 @@ using Bingo_CSD_412.Models;
 
 namespace Bingo_CSD_412.Controllers
 {
-    public class BoardsController : Controller
+    public class BoardsController : BaseController
     {
         //TODO implement connect to Database here and proper dependency injection for BoardManager into BoardsController 
         public static BoardManager boardManager = new BoardManager();
@@ -28,7 +28,15 @@ namespace Bingo_CSD_412.Controllers
         public ActionResult Details(int boardId)
         {
             Board board = boardManager.GetBoardById(boardId);
-            return View(board);
+           
+            if (ReturnJson())
+            {
+                return Json(board);
+            }
+            else
+            {
+                return View(board);
+            }
         }
 
         //logic for crossing the word in Board

@@ -4,7 +4,7 @@ using Bingo_CSD_412.Models;
 
 namespace Bingo_CSD_412.Controllers
 {
-    public class CategoriesController : Controller
+    public class CategoriesController : BaseController
     {
         //TODO implement connect to Database here and proper dependency injection for CategoryManager into CategoriesController 
         public static CategoryManager categoryManager = new CategoryManager();
@@ -19,7 +19,14 @@ namespace Bingo_CSD_412.Controllers
         // GET: Categories/Details/CSD_412
         public ActionResult Details(String categoryName)
         {
-            return View(Category.CSD_412_Category);
+            if (ReturnJson())
+            {
+                return Json(Category.CSD_412_Category);
+            }
+            else
+            {
+                return View();
+            }
         }
 
         // GET: Categories/Create
