@@ -8,8 +8,27 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-theme.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+        .bingo-pic {
+            max-width: 15%;
+        }
+
+        #bingo-occurred {
+            text-align: center;
+        }
+    </style>
 </head>
 <br />
+@if (Model.BingoOccurred)
+{
+    <div id="bingo-occurred">
+        <img class="bingo-pic" src="~/images/bingo_casino.gif" alt="Bingo Casino">
+        <img class="bingo-pic" src="~/images/bingo_casino.gif" alt="Bingo Casino">
+        <img class="bingo-pic" src="~/images/bingo_casino.gif" alt="Bingo Casino">
+        <img class="bingo-pic" src="~/images/bingo_casino.gif" alt="Bingo Casino">
+        <img class="bingo-pic" src="~/images/bingo_casino.gif" alt="Bingo Casino">
+    </div>
+}
 <table id="bingo-board" class="table table-bordered">
     <tr>
         <th>B</th>
@@ -25,7 +44,7 @@
             {
                 int i = ir * Model.NumberOfColumns + ic;
                 string checkState = (Model.IsCellCrossed(i)) ? "is-checked" : "not-checked"; //used to set class for visual feedback
-                
+
                 <td class="bingo-square @checkState">
                     <form asp-action="CrossWord">
                         <input type="hidden" name="boardId" value="@Model.BoardId" />
@@ -37,4 +56,15 @@
         </tr>
     }
 </table>
+@if (Model.BingoOccurred)
+{
+    <div id="bingo-occurred">
+        <img class="bingo-pic" src="~/images/bingo_jump.gif" alt="Bingo Jump">
+        <img class="bingo-pic" src="~/images/bingo_jump.gif" alt="Bingo Jump">
+        <img class="bingo-pic" src="~/images/bingo_jump.gif" alt="Bingo Jump">
+        <img class="bingo-pic" src="~/images/bingo_jump.gif" alt="Bingo Jump">
+        <img class="bingo-pic" src="~/images/bingo_jump.gif" alt="Bingo Jump">
+    </div>
+}
+
 <br />

@@ -60,3 +60,11 @@ body {
 .btn-link, .btn-link:hover {
     color: black
 }
+
+.bingo-pic {
+    max-width: 15%;
+}
+
+#bingo-occurred {
+    text-align: center;
+}
