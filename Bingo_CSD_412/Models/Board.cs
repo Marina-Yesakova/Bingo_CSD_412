@@ -10,7 +10,7 @@ namespace Bingo_CSD_412.Models
         public int BoardId { get; set; }
         public String Category { get; set; }
         public String[] DisplayBoard { get; set; } //Array that the user will see
-        public bool BingoOccurred;
+        public bool BingoOccurred  {get; set; }
         private HashSet<int> IdSet { get; set; } //Set used to operate with random selection logic
         private char[] DummyDatabase { get; set; } //place holder DB
         private bool[] FunctionalBoard { get; set; } //Array that tracks if a cell has been selected
