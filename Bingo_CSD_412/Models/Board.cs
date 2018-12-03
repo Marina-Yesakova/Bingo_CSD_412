@@ -10,10 +10,12 @@ namespace Bingo_CSD_412.Models
         public int BoardId { get; set; }
         public String Category { get; set; }
         public String[] DisplayBoard { get; set; } //Array that the user will see
+        public bool BingoOccured;
         private HashSet<int> IdSet { get; set; } //Set used to operate with random selection logic
         private char[] DummyDatabase { get; set; } //place holder DB
         private bool[] FunctionalBoard { get; set; } //Array that tracks if a cell has been selected
         private int Size;
+      
 
         // TODO: this should be handled by database - it should return us unique id for each Board we insert into database
         private static int nextId = 1;
@@ -31,6 +33,7 @@ namespace Bingo_CSD_412.Models
             GenerateDummyDatabase();
             FillSet();
             FillBoard();
+            BingoOccured = false;
         }
 
         /*
@@ -154,7 +157,7 @@ namespace Bingo_CSD_412.Models
         // to be implemented later
         private void GameOver()
         {
-            throw new NotImplementedException();
+            BingoOccured = true;
         }
     }
 }
