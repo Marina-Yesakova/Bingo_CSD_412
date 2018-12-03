@@ -63,7 +63,7 @@ namespace Bingo_CSD_412.Models
             foreach (int i in IdSet)
             {
                 // get value of ID i from database and store it in DisplayBoard[index] 
-                DisplayBoard[Index] = _WordsList.ElementAt(i).ToString();
+                DisplayBoard[Index] = _WordsList.ElementAt(i).Label;
                 Index++;
             }
         }
