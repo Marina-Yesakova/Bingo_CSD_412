@@ -10,7 +10,7 @@ namespace Bingo_CSD_412.Models
         public int NumberOfColumns { get; set; }
         public int BoardId { get; set; }
         public String Category { get; set; }
-        public bool BingoOcurred { get; set; }
+        public bool BingoOccurred { get; set; }
         public String[] DisplayBoard { get; set; } //Array that the user will see
         private HashSet<int> IdSet { get; set; } //Set used to operate with random selection logic
         private bool[] FunctionalBoard { get; set; } //Array that tracks if a cell has been selected
@@ -35,7 +35,7 @@ namespace Bingo_CSD_412.Models
             _WordsList = WordList;
             FillSet();
             FillBoard();
-            BingoOcurred = false;
+            BingoOccurred = false;
         }
 
 
@@ -151,7 +151,7 @@ namespace Bingo_CSD_412.Models
         // to be implemented later
         private void GameOver()
         {
-            BingoOcurred = true;
+            BingoOccurred = true;
         }
     }
 }
