@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Bingo_CSD_412.Models
 {
@@ -9,18 +10,19 @@ namespace Bingo_CSD_412.Models
         public int NumberOfColumns { get; set; }
         public int BoardId { get; set; }
         public String Category { get; set; }
+        public bool BingoOcurred { get; set; }
         public String[] DisplayBoard { get; set; } //Array that the user will see
-        public bool BingoOccurred  {get; set; }
         private HashSet<int> IdSet { get; set; } //Set used to operate with random selection logic
         private char[] DummyDatabase { get; set; } //place holder DB
         private bool[] FunctionalBoard { get; set; } //Array that tracks if a cell has been selected
         private int Size;
-      
+        private int _ContextSize;
+        private List<Word> _WordsList;
 
         // TODO: this should be handled by database - it should return us unique id for each Board we insert into database
         private static int nextId = 1;
 
-        public Board()
+        public Board(int ContextSize, List<Word> WordList)
         {
             BoardId = nextId;
             nextId++;
@@ -30,20 +32,13 @@ namespace Bingo_CSD_412.Models
             DisplayBoard = new String[Size];
             FunctionalBoard = new bool[Size]; //This array stores values of either 0 for not selected or 1 for select
             IdSet = new HashSet<int>();
-            GenerateDummyDatabase();
+            _ContextSize = ContextSize;
+            _WordsList = WordList;
             FillSet();
             FillBoard();
-            BingoOccurred = false;
+            BingoOcurred = false;
         }
 
-        /*
-        * This is a place holder method to be used while we are not connected to a database
-        * This method constructs a char array where the index of the Array represents the ID of the data
-        */
-        private void GenerateDummyDatabase()
-        {
-            DummyDatabase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()".ToCharArray();
-        }
 
         //This method creates a set of 25 random non-repeating IDs to be used to pull data from the DB
         private void FillSet()
@@ -52,7 +47,7 @@ namespace Bingo_CSD_412.Models
             bool ConfirmSize = false;
             while (!ConfirmSize)
             {
-                int value = Rnd.Next(40); //40 will be changed to the # of rows in the DB
+                int value = Rnd.Next(_ContextSize); 
                 IdSet.Add(value);
                 if (IdSet.Count == Size)
                 {
@@ -68,7 +63,7 @@ namespace Bingo_CSD_412.Models
             foreach (int i in IdSet)
             {
                 // get value of ID i from database and store it in DisplayBoard[index] 
-                DisplayBoard[Index] = DummyDatabase[i].ToString();
+                DisplayBoard[Index] = _WordsList.ElementAt(i).ToString();
                 Index++;
             }
         }
@@ -77,8 +72,7 @@ namespace Bingo_CSD_412.Models
         public void CellSelect(int index)
         {
             FunctionalBoard[index] = (FunctionalBoard[index] == true) ? false : true; //allows users to 'un-check' squares
-            BingoOccurred = false;
-            if (CheckForBingo())
+            if (CheckForBingo(index))
             {
                 GameOver();
             }
@@ -89,59 +83,66 @@ namespace Bingo_CSD_412.Models
             return FunctionalBoard[index];
         }
 
-        private bool CheckForBingo()
+        private bool CheckForBingo(int index)
         {
+            int ColumnCount = 0; //validation varible 
+            int RowCount = 0;
             int DiagonalCount = 0;
+            int RowPosition = 0;
+            int DiagonalPosition = 0;
 
-            for (int ir = 0, ic = 0; ic < NumberOfColumns && ir < NumberOfRows; ir++, ic++) //checks left-top:right-bottom Diagonal
+            while (index >= NumberOfColumns)
             {
-                if (IsCellCrossed(ir * NumberOfColumns + ic))
-                {
-                    DiagonalCount++;
-                }
-                else
-                {
-                    break;
-                }
-            }
-            if (DiagonalCount == NumberOfColumns || DiagonalCount == NumberOfRows)
-            {
-                return true;
+                RowPosition++;
+                index -= NumberOfColumns; //Sets index to point the earliest value in the column
             }
 
-            DiagonalCount = 0;
-            for (int ir = 0, ic = NumberOfColumns - 1; ic >= 0 && ir < NumberOfRows; ir++, ic--) //checks right-top:left-bottom Diagonal
+            int TempIndex = index;
+            for (int i = 0; i < NumberOfRows; i++) //Checks columns
             {
-                if (IsCellCrossed(ir * NumberOfColumns + ic))
+                if (IsCellCrossed(TempIndex)) //if column is crossed
                 {
-                    DiagonalCount++;
+                    ColumnCount++;
                 }
-                else
-                {
-                    break;
-                }
-            }
-            if (DiagonalCount == NumberOfColumns || DiagonalCount == NumberOfRows)
-            {
-                return true;
+                TempIndex += NumberOfColumns;
             }
 
-            int[] CheckedRows = new int[NumberOfRows];
-            int[] CheckedCols = new int[NumberOfColumns];
-            for (int ir = 0; ir < NumberOfRows; ir++)
+            if (RowPosition == index) //checks right Diagonal
             {
-                for (int ic = 0; ic < NumberOfColumns; ic++)
+                for (int i = 0; i < NumberOfColumns; i++)
                 {
-                    if (IsCellCrossed(ir * NumberOfColumns + ic))
+                    if (IsCellCrossed(DiagonalPosition))
                     {
-                        CheckedRows[ir]++;
-                        CheckedCols[ic]++;
-                        if (CheckedRows[ir] == NumberOfRows || CheckedCols[ic] == NumberOfColumns)
-                        {
-                            return true;
-                        }
+                        DiagonalCount++;
+                        DiagonalPosition += NumberOfColumns + 1;
                     }
                 }
+            }
+            else if (RowPosition + index == NumberOfRows - 1) //checks left Diagonal
+            {
+                DiagonalPosition = Size - NumberOfColumns;
+                for (int i = 0; i < NumberOfColumns; i++)
+                {
+                    if (IsCellCrossed(DiagonalPosition))
+                    {
+                        DiagonalCount++;
+                    }
+                    DiagonalPosition -= NumberOfColumns - 1;
+                }
+            }
+            index = RowPosition * NumberOfColumns;
+
+            for (int i = index; i < NumberOfColumns + index; i++) //checks rows
+            {
+                if (IsCellCrossed(i))
+                {
+                    RowCount++;
+                }
+            }
+
+            if (ColumnCount == NumberOfRows || RowCount == NumberOfColumns || DiagonalCount == NumberOfColumns) //if any of the three condition were true return true
+            {
+                return true;
             }
 
             return false;
@@ -151,7 +152,8 @@ namespace Bingo_CSD_412.Models
         // to be implemented later
         private void GameOver()
         {
-            BingoOccurred = true;
+            BingoOcurred = true;
         }
     }
 }
+
