@@ -14,7 +14,7 @@ namespace Bingo_CSD_412.Models
         public String[] DisplayBoard { get; set; } //Array that the user will see
         private HashSet<int> IdSet { get; set; } //Set used to operate with random selection logic
         private bool[] FunctionalBoard { get; set; } //Array that tracks if a cell has been selected
-        private int Size;
+        public int Size { get; }
         private int _ContextSize;
         private List<Word> _WordsList;
 
