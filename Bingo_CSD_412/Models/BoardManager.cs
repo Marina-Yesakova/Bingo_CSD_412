@@ -1,4 +1,5 @@
-﻿using System;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,10 +11,10 @@ namespace Bingo_CSD_412.Models
         // TODO: this should be implemented in database
         private static IDictionary<int, Board> boards = new Dictionary<int, Board>();
 
-        public Board GenerateBoard(int numberOfRows, int numberOfColumns, String category)
+        public Board GenerateBoard(int numberOfRows, int numberOfColumns, String category, int Size, List<Word> table)
         {
             //TODO implement logic or migrate from Board class
-            Board b = new Board();
+            Board b = new Board(Size, table);
             b.Category = category;
             boards[b.BoardId] = b;
             return b;
@@ -37,5 +38,7 @@ namespace Bingo_CSD_412.Models
             b.CellSelect(wordIndex);
             return b;
         }
+
+
     }
 }
