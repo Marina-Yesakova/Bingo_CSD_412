@@ -20,7 +20,19 @@ namespace Bingo_CSD_412.Models
 
         // TODO: this should be handled by database - it should return us unique id for each Board we insert into database
         private static int nextId = 1;
-
+        
+        public Board() //Non-database ctor
+        {   
+            NumberOfRows = 5;
+            NumberOfColumns = 5;
+            Size = NumberOfRows * NumberOfColumns;
+            _ContextSize = Size;
+            FunctionalBoard = new bool[Size]; //This array stores values of either 0 for not selected or 1 for select
+            IdSet = new HashSet<int>();
+            FillSet();
+            BingoOccurred = false;
+        }
+        
         public Board(int ContextSize, List<Word> WordList)
         {
             BoardId = nextId;
