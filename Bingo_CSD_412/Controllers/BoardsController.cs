@@ -25,7 +25,7 @@ namespace Bingo_CSD_412.Controllers
         }
 
         // GET: Boards/Generate/CSD_412
-        public async System.Threading.Tasks.Task<ActionResult> GenerateAsync(String category)
+        public async System.Threading.Tasks.Task<ActionResult> Generate(String category)
         {
             List<Word> WordsTable = await _db.Words.ToListAsync();
             int WordsTableSize = WordsTable.Count;
