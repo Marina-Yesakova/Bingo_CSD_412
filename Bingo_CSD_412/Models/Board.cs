@@ -83,7 +83,8 @@ namespace Bingo_CSD_412.Models
         public void CellSelect(int index)
         {
             FunctionalBoard[index] = (FunctionalBoard[index] == true) ? false : true; //allows users to 'un-check' squares
-            if (CheckForBingo(index))
+            BingoOccurred = false;
+            if (CheckForBingo())
             {
                 GameOver();
             }
@@ -94,66 +95,59 @@ namespace Bingo_CSD_412.Models
             return FunctionalBoard[index];
         }
 
-        private bool CheckForBingo(int index)
+        private bool CheckForBingo()
         {
-            int ColumnCount = 0; //validation varible 
-            int RowCount = 0;
             int DiagonalCount = 0;
-            int RowPosition = 0;
-            int DiagonalPosition = 0;
 
-            while (index >= NumberOfColumns)
+            for (int ir = 0, ic = 0; ic < NumberOfColumns && ir < NumberOfRows; ir++, ic++) //checks left-top:right-bottom Diagonal
             {
-                RowPosition++;
-                index -= NumberOfColumns; //Sets index to point the earliest value in the column
-            }
-
-            int TempIndex = index;
-            for (int i = 0; i < NumberOfRows; i++) //Checks columns
-            {
-                if (IsCellCrossed(TempIndex)) //if column is crossed
+                if (IsCellCrossed(ir * NumberOfColumns + ic))
                 {
-                    ColumnCount++;
+                    DiagonalCount++;
                 }
-                TempIndex += NumberOfColumns;
-            }
-
-            if (RowPosition == index) //checks right Diagonal
-            {
-                for (int i = 0; i < NumberOfColumns; i++)
+                else
                 {
-                    if (IsCellCrossed(DiagonalPosition))
-                    {
-                        DiagonalCount++;
-                        DiagonalPosition += NumberOfColumns + 1;
-                    }
+                    break;
                 }
             }
-            else if (RowPosition + index == NumberOfRows - 1) //checks left Diagonal
-            {
-                DiagonalPosition = Size - NumberOfColumns;
-                for (int i = 0; i < NumberOfColumns; i++)
-                {
-                    if (IsCellCrossed(DiagonalPosition))
-                    {
-                        DiagonalCount++;
-                    }
-                    DiagonalPosition -= NumberOfColumns - 1;
-                }
-            }
-            index = RowPosition * NumberOfColumns;
-
-            for (int i = index; i < NumberOfColumns + index; i++) //checks rows
-            {
-                if (IsCellCrossed(i))
-                {
-                    RowCount++;
-                }
-            }
-
-            if (ColumnCount == NumberOfRows || RowCount == NumberOfColumns || DiagonalCount == NumberOfColumns) //if any of the three condition were true return true
+            if (DiagonalCount == NumberOfColumns || DiagonalCount == NumberOfRows)
             {
                 return true;
+            }
+
+            DiagonalCount = 0;
+            for (int ir = 0, ic = NumberOfColumns - 1; ic >= 0 && ir < NumberOfRows; ir++, ic--) //checks right-top:left-bottom Diagonal
+            {
+                if (IsCellCrossed(ir * NumberOfColumns + ic))
+                {
+                    DiagonalCount++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            if (DiagonalCount == NumberOfColumns || DiagonalCount == NumberOfRows)
+            {
+                return true;
+            }
+
+            int[] CheckedRows = new int[NumberOfRows];
+            int[] CheckedCols = new int[NumberOfColumns];
+            for (int ir = 0; ir < NumberOfRows; ir++)
+            {
+                for (int ic = 0; ic < NumberOfColumns; ic++)
+                {
+                    if (IsCellCrossed(ir * NumberOfColumns + ic))
+                    {
+                        CheckedRows[ir]++;
+                        CheckedCols[ic]++;
+                        if (CheckedRows[ir] == NumberOfRows || CheckedCols[ic] == NumberOfColumns)
+                        {
+                            return true;
+                        }
+                    }
+                }
             }
 
             return false;
