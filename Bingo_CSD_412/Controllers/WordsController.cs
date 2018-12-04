@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Bingo_CSD_412.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Bingo_CSD_412.Controllers
 {
+    [Authorize]
     public class WordsController : Controller
     {
         private readonly BingoContext _context;
