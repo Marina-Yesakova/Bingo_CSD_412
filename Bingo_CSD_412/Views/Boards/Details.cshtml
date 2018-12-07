@@ -49,7 +49,7 @@
                     <form asp-action="CrossWord">
                         <input type="hidden" name="boardId" value="@Model.BoardId" />
                         <input type="hidden" name="wordIndex" value="@i" />
-                        <input type="submit" value=@Html.DisplayFor(modelItem => Model.DisplayBoard[i]) class="btn-link" />
+                        <input type="submit" value="@Html.DisplayFor(modelItem => Model.DisplayBoard[i])" class="btn-link" />
                     </form>
             </td>
             }
